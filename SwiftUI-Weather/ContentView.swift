@@ -8,32 +8,37 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var isNight = false
+    
     var body: some View {
         ZStack {
             /// Background
-            BackgroundView(topColor: .blue, bottomColor: Color.lightBlue)
+            /// The '$' Binds the isNight above to the isNight value in the BackgroundView
+            BackgroundView(isNight: $isNight)
             
             /// Location
             VStack {
                 CityTextView(cityName: "Englewood", state: "NJ")
                 
                 /// Current Weather Icon
-                CurrentWeatherView(imageName: "sun.max.fill",
-                                  temperature: 38)
+                CurrentWeatherView(imageName: isNight ? "moon.fill" :
+                                    "sun.max.fill",
+                                   temperature: 38)
                 
                 ///5-Day Forecast
                 HStack(spacing: 20) {
                     WeatherDayView(dayOfWeek: "FRI",
-                                   imageName: "sun.max.fill",
+                                   imageName: isNight ? "moon.fill" : "sun.max.fill",
                                    temperature: 55)
                     WeatherDayView(dayOfWeek: "SAT", 
                                    imageName: "cloud.fill",
                                    temperature: 58)
                     WeatherDayView(dayOfWeek: "SUN", 
-                                   imageName: "cloud.sun.fill",
+                                   imageName: isNight ? "cloud.moon.fill" : "cloud.sun.fill",
                                    temperature: 61)
                     WeatherDayView(dayOfWeek: "MON", 
-                                   imageName: "cloud.sun.fill",
+                                   imageName:  isNight ? "cloud.moon.fill" : "cloud.sun.fill",
                                    temperature: 59)
                     WeatherDayView(dayOfWeek: "TUE", 
                                    imageName: "cloud.fill",
@@ -43,7 +48,7 @@ struct ContentView: View {
                 Spacer()
                 
                 Button {
-                    print("tapped")
+                    isNight.toggle()
                 } label: {
                     WeatherButton(title: "Change Day Time", textColor: .blue, backgroundColor: .white)
                 }
