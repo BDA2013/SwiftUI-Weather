@@ -18,3 +18,8 @@ struct CityTextView: View {
             .padding()
     }
 }
+
+#Preview {
+    CityTextView(cityName: "Cupertino", state: "CA")
+        .background(Color.black)
+}
