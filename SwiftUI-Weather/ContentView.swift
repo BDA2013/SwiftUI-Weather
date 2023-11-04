@@ -15,7 +15,7 @@ struct ContentView: View {
         ZStack {
             /// Background
             /// The '$' Binds the isNight above to the isNight value in the BackgroundView
-            BackgroundView(isNight: $isNight)
+            BackgroundView(isNight: isNight)
             
             /// Location
             VStack {
